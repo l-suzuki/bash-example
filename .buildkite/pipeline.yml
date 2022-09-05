@@ -1,0 +1,30 @@
+steps:
+  - skip: "Skipping step 3"
+    label: "Step 3"
+    command: "true"
+    plugins:
+    - thedyrt/skip-checkout#v0.1.1: 
+  - wait
+  - label: "Step 4"
+    command: "true"
+    plugins:
+    - thedyrt/skip-checkout#v0.1.1: 
+  - label: "Step 5"
+    command: "true"
+    plugins:
+    - thedyrt/skip-checkout#v0.1.1: 
+  - group: "Group 1"
+    steps:
+    - wait
+    - label: "Group 1 - Step 1"
+      command: "true"
+      plugins:
+      - thedyrt/skip-checkout#v0.1.1: 
+    - label: "Group 1 - Step 2"
+      command: "true"
+      plugins:
+      - thedyrt/skip-checkout#v0.1.1: 
+  - label: "Step 56"
+    command: "true"
+    plugins:
+    - thedyrt/skip-checkout#v0.1.1:
