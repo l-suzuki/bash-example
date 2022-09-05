@@ -1,6 +1,5 @@
 steps:
-  - label: ":hammer: Example Script"
-    command: "script.sh"
-    artifact_paths: "artifacts/*"
-    agents:
-      queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
+  - label: ":toolbox:"
+    command: "echo \"\n  steps:       \n    - label: Step 3\n      command: 'true'\n      skip: Skipping step 3\n      plugins:\n        - thedyrt/skip-checkout#v0.1.1: ~\n    - wait\n    - label: Step 4\n      command: 'true'\n      plugins:\n        - thedyrt/skip-checkout#v0.1.1: ~\n    - label: Step 5\n      command: 'true'\n      plugins:\n        - thedyrt/skip-checkout#v0.1.1: ~\n    - group: 'Group 1'\n      steps:\n        - wait\n        - label: Group 1 - Step 1\n          command: 'true'\n          plugins:\n            - thedyrt/skip-checkout#v0.1.1: ~\n        - label: Group 1 - Step 2\n          command: 'true'\n          plugins:\n            - thedyrt/skip-checkout#v0.1.1: ~\n    - label: Step 56\n      command: 'true'\n      plugins:\n        - thedyrt/skip-checkout#v0.1.1: ~\n\" | buildkite-agent pipeline upload\n"
+    plugins:
+    - thedyrt/skip-checkout#v0.1.1:
