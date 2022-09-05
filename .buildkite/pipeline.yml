@@ -3,7 +3,7 @@ steps:
     steps:
     - label: ":hammer: Example Script"
       command: "script.sh"
-      command: "buildkite-agent pipeline upload nested.yaml"
+      command: "buildkite-agent pipeline upload .buildkite/nested.yml"
       artifact_paths: "artifacts/*"
       agents:
         queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
