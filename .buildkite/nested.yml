@@ -1,0 +1,5 @@
+steps:
+  - group: "addons"
+    steps:
+    - command: "echo nested step"
+    - command: "buildkite-agent pipeline upload .buildkite/doublenested.yml"

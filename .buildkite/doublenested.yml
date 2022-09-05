@@ -1,0 +1,5 @@
+steps:
+  - group: "addons"
+    steps:
+    - command: "echo double nested step"
+    - command: "echo double nested step 2"
