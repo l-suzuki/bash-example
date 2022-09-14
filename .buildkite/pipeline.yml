@@ -1,71 +1,45 @@
 steps:
-  - label: ':pipeline:'
-    plugins:
-      - thedyrt/skip-checkout#v0.1.1: ~
-    commands: 
-      - >
-        echo "
-        steps:
-          - label: ':toolbox:'
-            command: >
-              echo \"
-                steps:       
-                  - label: ':docker: Build'
-                    command: 'true'
-                    plugins:
-                      - thedyrt/skip-checkout#v0.1.1: ~
-                  - wait
-                  - group: ':hammer: Setup'
-                    steps:
-                      - label: ':bundler: Bundle'
-                        key: bundler
-                        command: 'true'
-                        plugins:
-                          - thedyrt/skip-checkout#v0.1.1: ~
-                      - label: ':yarn: Packages'
-                        key: packages
-                        command: 'true'
-                        plugins:
-                          - thedyrt/skip-checkout#v0.1.1: ~
-                      - label: 'Simple block step'
-                        block: "Release"
-                        prompt: "Fill out the details for release 1"
-                        fields: 
-                          - text: "Release 1 Name"
-                            key: "release1-name"
-                  - label: Random Work
-                    command: 'true'
-                    plugins:
-                      - thedyrt/skip-checkout#v0.1.1: ~
-                  - wait
-                  - group: ':hammer: Setup'
-                    steps:
-                      - label: 'Error annotation'
-                        command: "buildkite-agent annotate --context boo --style error \"ERROR ANNOTATION\""          
-                      - label: 'Cool chill step'
-                        command: 'true'
-                      - label: 'Default annotation'
-                        command: "buildkite-agent annotate --context meh --style default \"DEFAULT ANNOTATION\"; false"
-                        parallelism: 3
-                        soft_fail:
-                          - exit_status: '*'
-                      - label: 'Default annotation' 
-                        command: "buildkite-agent annotate --context meh --style default \"DEFAULT ANNOTATION\""
-                        parallelism: 6
-                        soft_fail:
-                          - exit_status: '*'
-                      - label: 'Block step'
-                        block: "Release"
-                        prompt: "Fill out the details for release"
-                        fields:
-                          - text: "Release Name"
-                            key: "release-name"
-                  - label: ':rspec: RSpec'
-                    command: 'true'
-                    plugins:
-                      - thedyrt/skip-checkout#v0.1.1: ~
-              \" | buildkite-agent pipeline upload
-            plugins:
-              - thedyrt/skip-checkout#v0.1.1: ~
-        " | buildkite-agent pipeline upload
-      - sleep 60 
+  - command: "true"
+    label: ":wave: Hi!"
+
+  - group: ":pencil: Annotations 1"
+    id: "annotations-1"
+    steps:
+      - command: "buildkite-agent annotate --context ok --style info \"INFO ANNOTATION\""
+        label: "Info annotation"
+      - command: "buildkite-agent annotate --context yay --style success \"SUCCESS ANNOTATION\""
+        label: "Success annotation"
+      - label: 'Block step 1'
+      block: "Release 1"
+      prompt: "Fill out the details for release 1"
+      fields:
+        - text: "Release 1 Name"
+          key: "release1-name"
+        
+  - group: ":pencil: Annotations 2"
+    id: "annotations-2"
+    steps:
+      - command: "buildkite-agent annotate --context uhoh --style warning \"WARNING ANNOTATION\"; false"
+        label: "Warning annotation"
+        soft_fail: "true"
+        
+  - group: ":pencil: Annotations 3"
+    id: "annotations-3"
+    steps:
+      - command: "buildkite-agent annotate --context boo --style error \"ERROR ANNOTATION\""
+        label: "Error annotation"
+      - command: "buildkite-agent annotate --context meh --style default \"DEFAULT ANNOTATION\"; false"
+        label: "Default annotation"
+        parallelism: 3
+      - command: "buildkite-agent annotate --context meh --style default \"DEFAULT ANNOTATION\""
+        label: "Default annotation"
+        parallelism: 6
+      - label: 'Block step 2'
+        block: "Release 2"
+        prompt: "Fill out the details for release 2"
+        fields:
+          - text: "Release 2 Name"
+            key: "release2-name"
+
+  - command: "sleep 5; true"
+    label: "Passes slowly"
