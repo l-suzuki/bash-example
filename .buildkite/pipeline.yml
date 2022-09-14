@@ -45,7 +45,9 @@ steps:
                         soft_fail:
                           - exit_status: '*'
                       - label: 'Cool chill step'
-                        command: true
+                        command: 'true'
+                        plugins:
+                          - thedyrt/skip-checkout#v0.1.1: ~
                       - label: 'Block step'
                         block: "Release"
                         prompt: "Fill out the details for release"
