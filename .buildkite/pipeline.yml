@@ -27,19 +27,6 @@ steps:
                         command: 'true'
                         plugins:
                           - thedyrt/skip-checkout#v0.1.1: ~
-
-                            - group: ":pencil: Annotations 3"
-                      - group: ":pencil: Nested Group"
-                      key: nested group
-                      steps:
-                        - command: "buildkite-agent annotate --context boo --style error \"ERROR ANNOTATION\""
-                          label: "Error annotation"
-                        - command: "buildkite-agent annotate --context meh --style default \"DEFAULT ANNOTATION\"; false"
-                          label: "Default annotation"
-                          parallelism: 3
-                        - command: "buildkite-agent annotate --context meh --style default \"DEFAULT ANNOTATION\""
-                          label: "Default annotation"
-                          parallelism: 6
                   - label: Random Work
                     command: 'true'
                     plugins:
