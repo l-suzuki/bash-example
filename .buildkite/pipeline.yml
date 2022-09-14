@@ -10,6 +10,8 @@ steps:
       - command: "buildkite-agent annotate --context yay --style success \"SUCCESS ANNOTATION\""
         label: "Success annotation"
         
+  - wait
+        
   - group: ":pencil: Annotations 2"
     id: "annotations-2"
     steps:
@@ -18,6 +20,7 @@ steps:
         soft_fail: "true"
         
   - group: ":pencil: Annotations 3"
+    depends_on: "annotations-2"
     id: "annotations-3"
     steps:
       - command: "buildkite-agent annotate --context boo --style error \"ERROR ANNOTATION\""
