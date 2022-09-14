@@ -1,0 +1,33 @@
+steps:
+  - command: "true"
+    label: ":wave: Hi!"
+
+  - group: ":pencil: Annotations 1"
+    id: "annotations-1"
+    steps:
+      - command: "buildkite-agent annotate --context ok --style info \"INFO ANNOTATION\""
+        label: "Info annotation"
+      - command: "buildkite-agent annotate --context yay --style success \"SUCCESS ANNOTATION\""
+        label: "Success annotation"
+        
+  - group: ":pencil: Annotations 2"
+    id: "annotations-2"
+    steps:
+      - command: "buildkite-agent annotate --context uhoh --style warning \"WARNING ANNOTATION\"; false"
+        label: "Warning annotation"
+        soft_fail: "true"
+        
+  - group: ":pencil: Annotations 3"
+    id: "annotations-3"
+    steps:
+      - command: "buildkite-agent annotate --context boo --style error \"ERROR ANNOTATION\""
+        label: "Error annotation"
+      - command: "buildkite-agent annotate --context meh --style default \"DEFAULT ANNOTATION\"; false"
+        label: "Default annotation"
+        parallelism: 3
+      - command: "buildkite-agent annotate --context meh --style default \"DEFAULT ANNOTATION\""
+        label: "Default annotation"
+        parallelism: 6
+
+  - command: "sleep 5; true"
+    label: "Passes slowly"
