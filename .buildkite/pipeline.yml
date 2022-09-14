@@ -41,13 +41,19 @@ steps:
                   - group: ':hammer: Setup'
                     steps:
                       - label: 'Error annotation'
-                        command: "buildkite-agent annotate --context boo --style error \"ERROR ANNOTATION\""
-                        soft_fail:
-                          - exit_status: '*'
+                        command: "buildkite-agent annotate --context boo --style error \"ERROR ANNOTATION\""          
                       - label: 'Cool chill step'
                         command: 'true'
-                        plugins:
-                          - thedyrt/skip-checkout#v0.1.1: ~
+                      - command: "buildkite-agent annotate --context meh --style default \"DEFAULT ANNOTATION\"; false"
+                        label: "Default annotation"
+                        parallelism: 3
+                        soft_fail:
+                          - exit_status: '*'
+                      - command: "buildkite-agent annotate --context meh --style default \"DEFAULT ANNOTATION\""
+                        label: "Default annotation"
+                        parallelism: 6
+                        soft_fail:
+                          - exit_status: '*'
                       - label: 'Block step'
                         block: "Release"
                         prompt: "Fill out the details for release"
