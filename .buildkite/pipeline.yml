@@ -37,7 +37,7 @@ steps:
                       - label: 'Error annotation'
                         command: "buildkite-agent annotate --context boo --style error \"ERROR ANNOTATION\""
                         soft_fail:
-                          - exit_status: "*"
+                          - exit_status: 42
                       - label: 'Cool chill step'
                         command: true
                       - label: 'Block step'
