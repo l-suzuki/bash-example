@@ -27,6 +27,12 @@ steps:
                         command: 'true'
                         plugins:
                           - thedyrt/skip-checkout#v0.1.1: ~
+                      - label: 'Simple block step'
+                        block: "Release"
+                        prompt: "Fill out the details for release 1"
+                        fields: 
+                          - text: "Release 1 Name"
+                            key: "release1-name"
                   - label: Random Work
                     command: 'true'
                     plugins:
@@ -47,8 +53,6 @@ steps:
                           - text: "Release Name"
                             key: "release-name"
                   - label: ':rspec: RSpec'
-                    depends_on:
-                      - bundler
                     command: 'true'
                     plugins:
                       - thedyrt/skip-checkout#v0.1.1: ~
