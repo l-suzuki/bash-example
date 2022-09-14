@@ -27,16 +27,17 @@ steps:
                         command: 'true'
                         plugins:
                           - thedyrt/skip-checkout#v0.1.1: ~
-                      - group: ':pencil: nested group'
-                        steps:
-                          - label: 'Error annotation'
-                            command: "buildkite-agent annotate --context boo --style error \"ERROR ANNOTATION\""
-                          - label: 'Cool step'
-                            command: true
                   - label: Random Work
                     command: 'true'
                     plugins:
                       - thedyrt/skip-checkout#v0.1.1: ~
+                  - wait
+                  - group: ':hammer: Setup'
+                    steps:
+                      - label: 'Error annotation'
+                        command: "buildkite-agent annotate --context boo --style error \"ERROR ANNOTATION\""
+                      - label: 'Cool step'
+                        command: true
                   - label: ':rspec: RSpec'
                     depends_on:
                       - bundler
