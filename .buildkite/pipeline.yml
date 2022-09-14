@@ -31,6 +31,8 @@ steps:
       - command: "buildkite-agent annotate --context meh --style default \"DEFAULT ANNOTATION\"; false"
         label: "Default annotation"
         parallelism: 3
+        soft_fail:
+          - exit_status: "*"
       - command: "buildkite-agent annotate --context meh --style default \"DEFAULT ANNOTATION\""
         label: "Default annotation"
         parallelism: 6
