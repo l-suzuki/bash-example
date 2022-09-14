@@ -14,7 +14,7 @@ steps:
         prompt: "Fill out the details for release 1"
         fields:
           - text: "Release 1 Name"
-          key: "release1-name"
+            key: "release1-name"
         
   - group: ":pencil: Annotations 2"
     id: "annotations-2"
