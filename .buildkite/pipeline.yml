@@ -10,10 +10,10 @@ steps:
       - command: "buildkite-agent annotate --context yay --style success \"SUCCESS ANNOTATION\""
         label: "Success annotation"
       - label: 'Block step 1'
-      block: "Release 1"
-      prompt: "Fill out the details for release 1"
-      fields:
-        - text: "Release 1 Name"
+        block: "Release 1"
+        prompt: "Fill out the details for release 1"
+        fields:
+          - text: "Release 1 Name"
           key: "release1-name"
         
   - group: ":pencil: Annotations 2"
